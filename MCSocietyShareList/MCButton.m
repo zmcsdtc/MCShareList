@@ -16,12 +16,10 @@
     {
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         self.titleLabel.font = [UIFont boldSystemFontOfSize:15];
-
+        
         self.imageView.contentMode = UIViewContentModeCenter;
-
+        
         self.style = MCStyleImageRightAndLeft;
-//        设置默认比例
-//        self.titleRatio = 1;
         _isClickAnimation=NO;
         [self addAnimations:_isClickAnimation];
     }
@@ -29,17 +27,16 @@
 }
 
 
-//添加点击动画
+#pragma mark-根据属性判断动画手势是否添加
 - (void)addAnimations:(BOOL)isClickAnimation{
     if (_isClickAnimation) {
         //点下去的动画
         [self addTarget:self action:@selector(scaleToSmall)
        forControlEvents:UIControlEventTouchDown | UIControlEventTouchDragEnter];
-        //    //点击响应动画
         [self addTarget:self action:@selector(scaleAnimation)
        forControlEvents:UIControlEventTouchUpInside];
     }
-
+    
 }
 //变小动画
 - (void)scaleToSmall
@@ -59,8 +56,8 @@
 }
 
 
+#pragma mark-重写各种内部方法-调整内部的文字布局和图片布局.
 
-#pragma mark 重写titleRectForContentRect方法，内部调整imageView的位置
 - (CGRect)titleRectForContentRect:(CGRect)contentRect
 {
     
@@ -95,11 +92,10 @@
         CGFloat H = self.frame.size.height;
         CGFloat W = self.frame.size.width*self.titleRatio;
         return CGRectMake(x, y, W, H);
-
+        
     }
 }
-#pragma mark-重写各种内部方法
-#pragma mark 重写 imageRectForContentRect方法，内部调整文字的位置
+
 - (CGRect)imageRectForContentRect:(CGRect)contentRect
 {
     if(self.style == MCStyleTextTopAndBottom)
@@ -138,7 +134,7 @@
 }
 
 
-//如果没有设置比例属性,图片图片优先权
+#pragma mark-重写内部内部设置文字和图片的方法,确立图片优先权.
 - (void) setImage:(UIImage *)image forState:(UIControlState)state{
     if (!self.titleRatio) {
         self.titleRatio=0;
@@ -160,7 +156,7 @@
 - (void) setHighlighted:(BOOL)highlighted{
     
 }
-#pragma makr-属性实现
+#pragma mark--类属性实现
 - (void) setTitleRatio:(CGFloat)titleRatio{
     _titleRatio=titleRatio;
     [self layoutIfNeeded];

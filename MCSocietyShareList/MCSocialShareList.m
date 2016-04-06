@@ -72,7 +72,7 @@ static UIView*_bgView;
     CGFloat bgViewW=SCREEN_WIDTH;
     bgView.userInteractionEnabled=YES;
     CGFloat bgViewH=NORMAL_SPACE+(NORMAL_SPACE+buttonH)*(count/maxCols+1)+cancelBtnH+NORMAL_SPACE;
-    bgView.backgroundColor=[UIColor yellowColor];
+    bgView.backgroundColor=[UIColor clearColor];
     bgView.frame=CGRectMake(0, SCREEN_HEIGHT, bgViewW, bgViewH);
     [self addSubview:bgView];
     [UIView animateWithDuration:BG_DURATION animations:^{
@@ -140,7 +140,7 @@ static UIView*_bgView;
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self  cancelWithCompletionBlock:nil];
 }
-
+#pragma mark-退出动画的Block,其他的退出都依据这个方法
 - (void)cancelWithCompletionBlock:(void (^)())completionBlock
 {
     self.userInteractionEnabled = NO;
