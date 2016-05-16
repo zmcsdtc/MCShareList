@@ -132,11 +132,15 @@ static UIView*_bgView;
         }
     }];
 }
-
+/**
+ *  取消
+ */
 - (void)clickCancel{
     [self  cancelWithCompletionBlock:nil];
 }
-
+/**
+ *  点击消失
+ */
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self  cancelWithCompletionBlock:nil];
 }
